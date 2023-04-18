@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "markuplint:recommended-react"
+  ],
+  "parser": {
+    ".(jsx|tsx)$": "@markuplint/jsx-parser"
+  },
+  "specs": {
+    ".(jsx|tsx)$": "@markuplint/react-spec"
+  },
+  "nodeRules": [
+    {
+      "selector": "*",
+      "rules": {
+        "character-reference": false
+      }
+    }
+  ],
+  "excludeFiles": [
+    "./dist/**/*.html",
+    "index.html"
+  ]
+}
