@@ -5,8 +5,12 @@ import { useAuthUser } from "@/features/auth/AuthProvider";
 const AuthGuard: FC<{ children: ReactNode }> = ({ children }) => {
   const user = useAuthUser();
 
-  if (!user) {
+  if (user === null) {
     return <Navigate to="/auth" />;
+  }
+
+  if (user === undefined) {
+    return null;
   }
 
   return <>{children}</>;

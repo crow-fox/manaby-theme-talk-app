@@ -40,13 +40,10 @@ const AuthContext = createContext<AuthUser>(initAuthUser);
 
 const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [authUser, setAuthUser] = useState<AuthUser>(initAuthUser);
-  console.log(authUser);
 
   useEffect(() => {
-    console.log("useEffect");
     const unsub = onAuthStateChanged(auth, async (_authUser) => {
       if (_authUser) {
-        console.log(_authUser);
         // ユーザーがログインした場合
         const ref = doc(db, "users", _authUser.uid);
         const docSnap = await getDoc(ref);
@@ -56,7 +53,6 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
           // そのユーザーのデータを取得して、authUserにセット
           const data = docSnap.data();
           if (isAppUser(data)) {
-            console.log("test");
             const appUser = data;
 
             setAuthUser({
@@ -87,7 +83,6 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     return () => {
       unsub();
-      console.log("useEffect clear");
     };
   }, []);
 
