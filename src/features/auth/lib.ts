@@ -4,7 +4,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth } from "@/utils/firebase/client";
+import { auth } from "@/lib/firebase/client";
 
 export const login = async (): Promise<UserCredential> => {
   const provider = new GoogleAuthProvider();

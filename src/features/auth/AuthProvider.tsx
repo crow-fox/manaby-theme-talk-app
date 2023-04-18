@@ -8,7 +8,7 @@ import {
 } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/utils/firebase/client";
+import { auth, db } from "@/lib/firebase/client";
 
 type AppUser = {
   id: string;
@@ -46,7 +46,6 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       if (_authUser) {
         // ユーザーがログインした場合
         const ref = doc(db, "users", _authUser.uid);
-
         setAuthUser(undefined);
 
         const docSnap = await getDoc(ref);
