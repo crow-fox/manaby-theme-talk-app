@@ -46,6 +46,9 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       if (_authUser) {
         // ユーザーがログインした場合
         const ref = doc(db, "users", _authUser.uid);
+
+        setAuthUser(undefined);
+
         const docSnap = await getDoc(ref);
 
         if (docSnap.exists()) {
