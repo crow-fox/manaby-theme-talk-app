@@ -114,5 +114,9 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["vite.config.ts", "tailwind.config.js"]
+  "ignorePatterns": [
+    "vite.config.ts",
+    "tailwind.config.js",
+    "postcss.config.js"
+  ]
 }

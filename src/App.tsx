@@ -1,20 +1,21 @@
 import { type FC } from "react";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import About from "./pages/About";
+import Layout from "./components/Layout";
+import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Talk from "./pages/Talk";
 
 const App: FC = () => {
   return (
-    <div>
-      <h1>Vite + React</h1>
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/talk" element={<Talk />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
+    </Layout>
   );
 };
 
