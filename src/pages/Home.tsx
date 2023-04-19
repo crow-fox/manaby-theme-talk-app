@@ -4,7 +4,7 @@ import ThemeDashBoard from "@/features/themes/ThemeDashboard";
 const Home: FC = () => {
   return (
     <section>
-      <h2>Home</h2>
+      <h2>ダッシュボード</h2>
       <ThemeDashBoard />
     </section>
   );

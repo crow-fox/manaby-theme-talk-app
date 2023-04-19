@@ -6,15 +6,10 @@ type Props = {
   themeId: string;
   title: string;
   talked: boolean;
-  resetDeleteTheme: () => void;
+  close: () => void;
 };
 
-const DeleteThemeDialog: FC<Props> = ({
-  themeId,
-  title,
-  talked,
-  resetDeleteTheme,
-}) => {
+const DeleteThemeDialog: FC<Props> = ({ themeId, title, talked, close }) => {
   const uid = useId();
   const user = useAuthUser();
 
@@ -22,7 +17,7 @@ const DeleteThemeDialog: FC<Props> = ({
 
   const handleDelete = async () => {
     await deleteTheme(user.id, themeId);
-    resetDeleteTheme();
+    close();
   };
 
   return (

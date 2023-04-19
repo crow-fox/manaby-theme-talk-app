@@ -6,11 +6,12 @@ import { isFirebaseTheme, type Theme } from "@/features/themes/types";
 import { db } from "@/lib/firebase/client";
 
 type Props = {
+  handleAdd: () => void;
   handleEdit: (theme: Theme) => void;
   handleDelete: (theme: Theme) => void;
 };
 
-const ThemeTable: FC<Props> = ({ handleEdit, handleDelete }) => {
+const ThemeTable: FC<Props> = ({ handleAdd, handleEdit, handleDelete }) => {
   const user = useAuthUser();
   const [themes, setThemes] = useState<Theme[]>([]);
 
@@ -62,8 +63,8 @@ const ThemeTable: FC<Props> = ({ handleEdit, handleDelete }) => {
 
   return (
     <>
-      {themes.length !== 0 && (
-        <div className="min-w-[40rem]">
+      <div className="min-w-[40rem] bg-white">
+        {themes.length !== 0 ? (
           <table className="w-full border-collapse text-left">
             <thead className=" sticky left-0 top-0 w-full  border  border-gray-600">
               <tr className=" flex w-full bg-gray-500 p-4  text-white ">
@@ -114,8 +115,12 @@ const ThemeTable: FC<Props> = ({ handleEdit, handleDelete }) => {
               ))}
             </tbody>
           </table>
-        </div>
-      )}
+        ) : (
+          <div className="grid place-items-center py-4 ">
+            <button onClick={handleAdd}>新規追加</button>
+          </div>
+        )}
+      </div>
     </>
   );
 };
