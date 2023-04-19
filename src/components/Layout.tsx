@@ -1,7 +1,10 @@
 import { type FC, type ReactNode } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuthUser } from "@/features/auth/AuthProvider";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  const user = useAuthUser();
+
   return (
     <div className="grid min-h-full grid-rows-[auto_1fr_auto] font-sans leading-normal text-gray-900">
       <div>
@@ -9,7 +12,14 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           <h1 className="text-2xl font-bold">
             <Link to="/">manabyテーマトーク</Link>
           </h1>
-          <div></div>
+          <div>
+            {user && (
+              <>
+                <p>{user.name}</p>
+                <Link to="/auth">ログアウト</Link>
+              </>
+            )}
+          </div>
         </header>
         <div className="mx-auto max-w-[75rem] px-8">
           <nav>
