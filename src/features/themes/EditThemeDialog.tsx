@@ -6,10 +6,15 @@ type Props = {
   themeId: string;
   title: string;
   talked: boolean;
-  onSubmit: () => void;
+  handleClose: () => void;
 };
 
-const EditThemeDialog: FC<Props> = ({ themeId, title, talked, onSubmit }) => {
+const EditThemeDialog: FC<Props> = ({
+  themeId,
+  title,
+  talked,
+  handleClose,
+}) => {
   const uid = useId();
   const user = useAuthUser();
 
@@ -21,7 +26,7 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked, onSubmit }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await updateTheme(user.id, themeId, { title: newTitle, talked: newTalked });
-    onSubmit();
+    handleClose();
   };
 
   return (
@@ -54,6 +59,11 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked, onSubmit }) => {
           <button type="submit">編集を確定</button>
         </p>
       </form>
+      <p>
+        <button type="button" onClick={handleClose}>
+          閉じる
+        </button>
+      </p>
     </div>
   );
 };

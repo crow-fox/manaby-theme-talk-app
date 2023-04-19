@@ -25,7 +25,7 @@ const ThemeDashBoard: FC = () => {
           themeId={editTheme.id}
           title={editTheme.title}
           talked={editTheme.talked}
-          onSubmit={resetEditTheme}
+          handleClose={resetEditTheme}
         />
       )}
     </>
