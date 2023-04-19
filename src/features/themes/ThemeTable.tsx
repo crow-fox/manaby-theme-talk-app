@@ -1,9 +1,7 @@
-import { useEffect, useState, type FC } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { type FC } from "react";
 import { useAuthUser } from "@/features/auth/AuthProvider";
-import { timestampToDate } from "@/features/themes/lib";
-import { isFirebaseTheme, type Theme } from "@/features/themes/types";
-import { db } from "@/lib/firebase/client";
+import { useThemes } from "@/features/themes/ThemesProvider";
+import { type Theme } from "@/features/themes/types";
 
 type Props = {
   handleAdd: () => void;
@@ -13,49 +11,7 @@ type Props = {
 
 const ThemeTable: FC<Props> = ({ handleAdd, handleEdit, handleDelete }) => {
   const user = useAuthUser();
-  const [themes, setThemes] = useState<Theme[]>([]);
-
-  useEffect(() => {
-    if (user === null) {
-      setThemes([]);
-
-      return;
-    }
-
-    if (user === undefined) {
-      return;
-    }
-
-    const unsub = onSnapshot(
-      query(
-        collection(db, "users", user.id, "themes"),
-        orderBy("createdAt", "desc")
-      ),
-      (snapshot) => {
-        const _themes: Theme[] = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (isFirebaseTheme(data)) {
-            _themes.push({
-              id: doc.id,
-              title: data.title,
-              talked: data.talked,
-              createdAt: timestampToDate(data.createdAt),
-              updatedAt: timestampToDate(data.updatedAt),
-              user_id: data.user_id,
-            });
-          } else {
-            throw new Error("firebaseからの返却値の値が不正");
-          }
-        });
-        setThemes(_themes);
-      }
-    );
-
-    return () => {
-      unsub();
-    };
-  }, [user]);
+  const themes = useThemes();
 
   if (!user) {
     return null;
