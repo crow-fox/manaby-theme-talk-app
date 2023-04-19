@@ -1,13 +1,11 @@
 import { type FC } from "react";
-import ThemeTable from "@/features/themes/ThemeTable";
-import AddTheme from "@/features/themes/addTheme";
+import ThemeDashBoard from "@/features/themes/ThemeDashboard";
 
 const Home: FC = () => {
   return (
     <section>
       <h2>Home</h2>
-      <AddTheme />
-      <ThemeTable />
+      <ThemeDashBoard />
     </section>
   );
 };

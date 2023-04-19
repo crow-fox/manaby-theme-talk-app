@@ -5,7 +5,11 @@ import { timestampToDate } from "@/features/themes/lib";
 import { isFirebaseTheme, type Theme } from "@/features/themes/types";
 import { db } from "@/lib/firebase/client";
 
-const ThemeTable: FC = () => {
+type Props = {
+  handleEdit: (theme: Theme) => void;
+};
+
+const ThemeTable: FC<Props> = ({ handleEdit }) => {
   const user = useAuthUser();
   const [themes, setThemes] = useState<Theme[]>([]);
 
@@ -82,7 +86,12 @@ const ThemeTable: FC = () => {
                   <td className="flex-[0_1_8rem] ">
                     <ul className="flex gap-x-4 ">
                       <li>
-                        <button className="rounded-md bg-gray-600 p-2 text-white ">
+                        <button
+                          onClick={() => {
+                            handleEdit(theme);
+                          }}
+                          className="rounded-md bg-gray-600 p-2 text-white "
+                        >
                           編集
                         </button>
                       </li>

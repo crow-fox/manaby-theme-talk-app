@@ -3,6 +3,8 @@ import {
   addDoc,
   collection,
   serverTimestamp,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 
@@ -15,6 +17,22 @@ export const createTheme = async (
     title,
     talked: false,
     createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+};
+
+export const updateTheme = async (
+  userId: string,
+  themeId: string,
+  updateData: {
+    title?: string;
+    talked?: boolean;
+  }
+): Promise<void> => {
+  const themeRef = doc(db, "users", userId, "themes", themeId);
+
+  await updateDoc(themeRef, {
+    ...updateData,
     updatedAt: serverTimestamp(),
   });
 };

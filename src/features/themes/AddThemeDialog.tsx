@@ -4,7 +4,7 @@ import Spinner from "@/components/Spinner";
 import { useAuthUser } from "@/features/auth/AuthProvider";
 import { createTheme } from "@/features/themes/lib";
 
-const AddTheme: FC = () => {
+const AddThemeDialog: FC = () => {
   const [themeTitle, setThemeTitle] = useState("");
   const uid = useId();
   const user = useAuthUser();
@@ -54,4 +54,4 @@ const AddTheme: FC = () => {
   );
 };
 
-export default AddTheme;
+export default AddThemeDialog;
