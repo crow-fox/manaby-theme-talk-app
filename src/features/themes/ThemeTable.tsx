@@ -7,9 +7,10 @@ import { db } from "@/lib/firebase/client";
 
 type Props = {
   handleEdit: (theme: Theme) => void;
+  handleDelete: (theme: Theme) => void;
 };
 
-const ThemeTable: FC<Props> = ({ handleEdit }) => {
+const ThemeTable: FC<Props> = ({ handleEdit, handleDelete }) => {
   const user = useAuthUser();
   const [themes, setThemes] = useState<Theme[]>([]);
 
@@ -87,6 +88,7 @@ const ThemeTable: FC<Props> = ({ handleEdit }) => {
                     <ul className="flex gap-x-4 ">
                       <li>
                         <button
+                          type="button"
                           onClick={() => {
                             handleEdit(theme);
                           }}
@@ -96,7 +98,13 @@ const ThemeTable: FC<Props> = ({ handleEdit }) => {
                         </button>
                       </li>
                       <li>
-                        <button className="rounded-md bg-red-500 p-2 text-white ">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleDelete(theme);
+                          }}
+                          className="rounded-md bg-red-500 p-2 text-white "
+                        >
                           削除
                         </button>
                       </li>

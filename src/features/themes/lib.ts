@@ -5,6 +5,7 @@ import {
   serverTimestamp,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 
@@ -35,6 +36,15 @@ export const updateTheme = async (
     ...updateData,
     updatedAt: serverTimestamp(),
   });
+};
+
+export const deleteTheme = async (
+  userId: string,
+  themeId: string
+): Promise<void> => {
+  const themeRef = doc(db, "users", userId, "themes", themeId);
+
+  await deleteDoc(themeRef);
 };
 
 export const timestampToDate = (timestamp: {
