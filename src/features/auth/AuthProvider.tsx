@@ -44,7 +44,6 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (_authUser) => {
       if (_authUser) {
-        console.log(_authUser);
         // ユーザーがログインした場合
         const ref = doc(db, "users", _authUser.uid);
         setAuthUser(undefined);

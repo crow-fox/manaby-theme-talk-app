@@ -22,6 +22,7 @@ type Props = {
 
 const ThemesProvider: FC<Props> = ({ children }) => {
   const [themes, setThemes] = useState<Theme[]>(defaultThemes);
+
   const user = useAuthUser();
 
   useEffect(() => {
@@ -54,7 +55,7 @@ const ThemesProvider: FC<Props> = ({ children }) => {
               user_id: data.user_id,
             });
           } else {
-            throw new Error("firebaseからの返却値の値が不正");
+            // throw new Error("firebaseからの返却値の値が不正");
           }
         });
         setThemes(_themes);

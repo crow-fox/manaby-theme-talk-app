@@ -6,7 +6,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const user = useAuthUser();
 
   return (
-    <div className="grid min-h-full grid-rows-[auto_1fr_auto] font-sans leading-normal text-gray-900">
+    <div className="grid min-h-full grid-rows-[auto_1fr_auto] break-all font-sans leading-normal text-gray-900">
       <div>
         <header className="mx-auto flex max-w-[75rem] flex-wrap items-center justify-between  gap-x-4 gap-y-2 px-8 py-4">
           <h1 className="text-2xl font-bold">

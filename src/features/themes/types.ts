@@ -16,6 +16,7 @@ export type FirebaseTheme = {
 };
 
 export const isFirebaseTheme = (value: unknown): value is FirebaseTheme => {
+  console.log({ value });
   if (typeof value !== "object" || value === null) return false;
   const obj = value as Record<string, unknown>;
 
