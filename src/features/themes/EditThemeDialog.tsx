@@ -1,4 +1,6 @@
-import { type FC, useId, useState, type FormEvent } from "react";
+import { useRef, useState, type FC, type FormEvent } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import * as Form from "@radix-ui/react-form";
 import { useAuthUser } from "@/features/auth/AuthProvider";
 import { updateTheme } from "@/features/themes/lib";
 
@@ -6,60 +8,92 @@ type Props = {
   themeId: string;
   title: string;
   talked: boolean;
-  close: () => void;
 };
 
-const EditThemeDialog: FC<Props> = ({ themeId, title, talked, close }) => {
-  const uid = useId();
+const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
   const user = useAuthUser();
-
-  const [newTitle, setNewTitle] = useState<string>(title);
-  const [newTalked, setNewTalked] = useState<boolean>(talked);
+  const [newTheme, setNewTheme] = useState<{ title: string; talked: boolean }>({
+    title,
+    talked,
+  });
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   if (!user) return null;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateTheme(user.id, themeId, { title: newTitle, talked: newTalked });
-    close();
+    if (newTheme.title === title && newTheme.talked === talked) {
+      return;
+    }
+
+    await updateTheme(user.id, themeId, { ...newTheme });
+    setOpen(false);
+    openButtonRef.current?.focus();
   };
 
   return (
-    <div role="dialog" aria-labelledby={uid}>
-      <h3 id={uid}>編集</h3>
-      <form onSubmit={handleSubmit}>
-        <p>
-          <label htmlFor={`${uid}-title`}>テーマタイトル</label>
-          <input
-            type="text"
-            id={`${uid}-title`}
-            value={newTitle}
-            onChange={(e) => {
-              setNewTitle(e.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label htmlFor={`${uid}-talked`}>話した？</label>
-          <input
-            type="checkbox"
-            id={`${uid}-talked`}
-            checked={newTalked}
-            onChange={(e) => {
-              setNewTalked(e.target.checked);
-            }}
-          />
-        </p>
-        <p>
-          <button type="submit">編集を確定</button>
-        </p>
-      </form>
-      <p>
-        <button type="button" onClick={close}>
-          閉じる
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger asChild ref={openButtonRef}>
+        <button className=" rounded-md bg-gray-600 p-2 font-bold text-white">
+          編集
         </button>
-      </p>
-    </div>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <Dialog.Content className=" grid w-[min(40rem,100%)] gap-6 rounded-md bg-white p-8">
+            <Dialog.Title className="text-2xl font-bold ">
+              トークテーマを編集
+            </Dialog.Title>
+            <Form.Root onSubmit={handleSubmit}>
+              <div className="grid gap-y-4">
+                <Form.Field name="title" className="grid gap-y-2">
+                  <Form.Label className="text-sm ">トークテーマ</Form.Label>
+                  <Form.Control
+                    className="rounded-sm border border-blue-700 p-4 text-lg"
+                    type="text"
+                    value={newTheme.title}
+                    onChange={(e) => {
+                      setNewTheme({ ...newTheme, title: e.target.value });
+                    }}
+                    required
+                    minLength={1}
+                  />
+                </Form.Field>
+                <Form.Field name="talked" className="grid gap-y-2">
+                  <Form.Label className="text-sm ">話した？</Form.Label>
+                  <Form.Control
+                    className="rounded-sm border border-blue-700 p-4 text-lg"
+                    type="checkbox"
+                    checked={newTheme.talked}
+                    onChange={(e) => {
+                      setNewTheme({ ...newTheme, talked: e.target.checked });
+                    }}
+                  />
+                </Form.Field>
+                <div className="grid">
+                  <Form.Submit asChild>
+                    <button
+                      type="submit"
+                      className=" rounded-sm bg-blue-600 p-4 font-bold text-white"
+                    >
+                      編集を確定
+                    </button>
+                  </Form.Submit>
+                </div>
+              </div>
+            </Form.Root>
+            <div className="flex justify-end ">
+              <Dialog.Close asChild>
+                <button className=" rounded-sm border border-blue-950 px-4 py-2 font-bold">
+                  閉じる
+                </button>
+              </Dialog.Close>
+            </div>
+          </Dialog.Content>
+        </Dialog.Overlay>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 

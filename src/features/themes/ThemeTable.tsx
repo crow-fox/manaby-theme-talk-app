@@ -1,14 +1,14 @@
 import { type FC } from "react";
 import { useAuthUser } from "@/features/auth/AuthProvider";
+import EditThemeDialog from "@/features/themes/EditThemeDialog";
 import { type Theme } from "@/features/themes/types";
 
 type Props = {
   themes: Theme[];
-  handleEdit: (theme: Theme) => void;
   handleDelete: (theme: Theme) => void;
 };
 
-const ThemeTable: FC<Props> = ({ themes, handleEdit, handleDelete }) => {
+const ThemeTable: FC<Props> = ({ themes, handleDelete }) => {
   const user = useAuthUser();
 
   if (!user) {
@@ -41,15 +41,11 @@ const ThemeTable: FC<Props> = ({ themes, handleEdit, handleDelete }) => {
                 <td className="flex-[0_1_8rem] ">
                   <ul className="flex gap-x-4 ">
                     <li>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleEdit(theme);
-                        }}
-                        className="rounded-md bg-gray-600 p-2 text-white "
-                      >
-                        編集
-                      </button>
+                      <EditThemeDialog
+                        themeId={theme.id}
+                        title={theme.title}
+                        talked={theme.talked}
+                      />
                     </li>
                     <li>
                       <button

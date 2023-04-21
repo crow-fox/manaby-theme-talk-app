@@ -1,7 +1,6 @@
 import { useState, type FC } from "react";
 import AddThemeDialog from "@/features/themes/AddThemeDialog";
 import DeleteThemeDialog from "@/features/themes/DeleteThemeDialog";
-import EditThemeDialog from "@/features/themes/EditThemeDialog";
 import ThemeTable from "@/features/themes/ThemeTable";
 import { useThemes } from "@/features/themes/ThemesProvider";
 import { type Theme } from "@/features/themes/types";
@@ -12,7 +11,6 @@ const ThemeDashBoard: FC = () => {
   const [themeStatus, setThemeStatus] = useState<
     "read" | "add" | "edit" | "delete"
   >("read");
-  const [editTheme, setEditTheme] = useState<Theme | null>(null);
   const [deleteTheme, setDeleteTheme] = useState<Theme | null>(null);
   const [themesFilter, setThemesFilter] = useState<
     "all" | "talked" | "untalked"
@@ -26,16 +24,6 @@ const ThemeDashBoard: FC = () => {
 
   const handleAdd = () => {
     setThemeStatus("add");
-  };
-
-  const handleEdit = (theme: Theme) => {
-    setThemeStatus("edit");
-    setEditTheme(theme);
-  };
-
-  const handleEditClose = () => {
-    setThemeStatus("read");
-    setEditTheme(null);
   };
 
   const handleDelete = (theme: Theme) => {
@@ -115,27 +103,13 @@ const ThemeDashBoard: FC = () => {
 
       <div className="mt-4">
         {hasThemes ? (
-          <ThemeTable
-            themes={filterdThemes}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-          />
+          <ThemeTable themes={filterdThemes} handleDelete={handleDelete} />
         ) : (
           <div className="grid place-items-center py-4 ">
             <button onClick={handleAdd}>新規追加</button>
           </div>
         )}
       </div>
-
-      {themeStatus === "edit" && editTheme && (
-        <EditThemeDialog
-          key={editTheme.id}
-          themeId={editTheme.id}
-          title={editTheme.title}
-          talked={editTheme.talked}
-          close={handleEditClose}
-        />
-      )}
 
       {themeStatus === "delete" && deleteTheme && (
         <DeleteThemeDialog
