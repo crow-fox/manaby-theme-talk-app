@@ -45,4 +45,10 @@ export const isFirebaseTheme = (value: unknown): value is FirebaseTheme => {
   }
 };
 
-export type ThemeFilter = "all" | "talked" | "untalked";
+export const themeFilters = {
+  all: "全て",
+  talked: "話した",
+  untalked: "話してない",
+} as const satisfies Record<string, string>;
+
+export type ThemeFilter = keyof typeof themeFilters;

@@ -31,7 +31,7 @@ const ThemeDashBoard: FC = () => {
       <div className="grid place-items-end">
         <div className="flex flex-wrap items-center gap-2">
           <AddThemeDialog />
-          <FilterThemes handleFilter={setFilter} />
+          <FilterThemes filter={filter} handleFilter={setFilter} />
         </div>
       </div>
 
