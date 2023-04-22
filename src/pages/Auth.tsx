@@ -19,35 +19,39 @@ const Auth: FC = () => {
   };
 
   return (
-    <>
-      <div>Auth</div>
-      <p>user: {user?.name}</p>
-      <button
-        onClick={() => {
-          navigate("/talk");
-        }}
-      >
-        tetetete
-      </button>
-
-      <div className="flex flex-wrap items-center gap-x-4">
-        {user ? (
-          <button
-            onClick={handleLogout}
-            className=" rounded-md bg-blue-600 px-4 py-2 font-bold text-white"
-          >
-            ログアウト
-          </button>
-        ) : (
+    <div className="mx-auto w-[min(40rem,100%)]">
+      {user ? (
+        <div className="grid gap-8">
+          <dl>
+            <div className="flex flex-wrap border-b border-gray-600 ">
+              <dt className=" flex-[1_0_6rem] p-4 text-xl font-bold">名前</dt>
+              <dd className="flex-[999_1_0] p-4 text-xl">{user?.name}</dd>
+            </div>
+            <div className="flex flex-wrap border-b border-gray-600 ">
+              <dt className=" flex-[1_0_6rem] p-4 text-xl font-bold">Email</dt>
+              <dd className="flex-[999_1_0] p-4 text-xl">{user?.email}</dd>
+            </div>
+          </dl>
+          <p className="flex justify-center">
+            <button
+              onClick={handleLogout}
+              className=" w-96 rounded-md border-2 border-blue-400 bg-blue-200  p-4 text-lg font-bold "
+            >
+              ログアウト
+            </button>
+          </p>
+        </div>
+      ) : (
+        <p className="flex justify-center ">
           <button
             onClick={handleLogin}
-            className=" rounded-md bg-blue-600 px-4 py-2 font-bold text-white"
+            className="  w-96 rounded-md border-2 border-blue-400 bg-blue-200  p-4 text-lg font-bold "
           >
-            ログイン
+            Googleでログイン
           </button>
-        )}
-      </div>
-    </>
+        </p>
+      )}
+    </div>
   );
 };
 
