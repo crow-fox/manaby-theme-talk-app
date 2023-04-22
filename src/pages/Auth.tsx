@@ -21,13 +21,14 @@ const Auth: FC = () => {
   return (
     <div className="mx-auto w-[min(40rem,100%)]">
       {user ? (
-        <div className="grid gap-8">
+        <div className="space-y-6">
+          <h2 className=" text-2xl font-bold">ユーザー情報</h2>
           <dl>
-            <div className="flex flex-wrap border-b border-gray-600 ">
+            <div className="flex flex-wrap border-y border-gray-600 ">
               <dt className=" flex-[1_0_6rem] p-4 text-xl font-bold">名前</dt>
               <dd className="flex-[999_1_0] p-4 text-xl">{user?.name}</dd>
             </div>
-            <div className="flex flex-wrap border-b border-gray-600 ">
+            <div className="mt-[-1px] flex flex-wrap border-y border-gray-600 ">
               <dt className=" flex-[1_0_6rem] p-4 text-xl font-bold">Email</dt>
               <dd className="flex-[999_1_0] p-4 text-xl">{user?.email}</dd>
             </div>

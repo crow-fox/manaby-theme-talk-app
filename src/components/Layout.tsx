@@ -12,14 +12,11 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           <h1 className="text-2xl font-bold">
             <Link to="/">manabyテーマトーク</Link>
           </h1>
-          <div>
-            {user && (
-              <>
-                <p>{user.name}</p>
-                <Link to="/auth">ログアウト</Link>
-              </>
-            )}
-          </div>
+          {user && (
+            <Link to="/auth" className="underline underline-offset-4">
+              {user.name}
+            </Link>
+          )}
         </header>
         <div className="mx-auto max-w-[75rem] px-8">
           <nav>
