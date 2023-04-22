@@ -45,7 +45,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
                       : "inline-block border-b-4 border-transparent py-2 text-lg font-bold text-gray-600"
                   }
                 >
-                  話す
+                  トークする
                 </NavLink>
               </li>
             </ul>

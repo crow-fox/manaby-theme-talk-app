@@ -54,6 +54,8 @@ const AddThemeDialog: FC = () => {
                     トークテーマを入力
                   </Form.Label>
                   <Form.Control
+                    autoComplete="off"
+                    name="title"
                     className="rounded-sm border border-blue-700 p-4 text-lg"
                     type="text"
                     value={themeTitle}

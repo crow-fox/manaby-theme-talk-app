@@ -67,6 +67,8 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
                 <Form.Field name="title" className="grid gap-y-2">
                   <Form.Label className="text-sm ">トークテーマ</Form.Label>
                   <Form.Control
+                    autoComplete="off"
+                    name="title"
                     className="rounded-sm border border-blue-700 p-4 text-lg"
                     type="text"
                     value={newTheme.title}
@@ -80,6 +82,7 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
                 <Form.Field name="talked" className="grid gap-y-2">
                   <Form.Label className="text-sm ">話した？</Form.Label>
                   <Form.Control
+                    name="talked"
                     className="rounded-sm border border-blue-700 p-4 text-lg"
                     type="checkbox"
                     checked={newTheme.talked}

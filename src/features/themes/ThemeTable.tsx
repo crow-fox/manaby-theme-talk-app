@@ -30,7 +30,9 @@ const ThemeTable: FC<Props> = ({ themes }) => {
           </table>
         </div>
       ) : (
-        <div className="grid place-items-center py-4 ">
+        <div className="grid place-items-center gap-y-2 py-4 ">
+          <p>トークテーマがありません</p>
+          <p>トークテーマを追加してください</p>
           <AddThemeDialog />
         </div>
       )}

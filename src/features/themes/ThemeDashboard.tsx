@@ -38,16 +38,6 @@ const ThemeDashBoard: FC = () => {
       <div className="mt-4">
         <ThemeTable themes={filteredThemes} />
       </div>
-
-      {/* {themeStatus === "delete" && deleteTheme && (
-        <DeleteThemeDialog
-          key={deleteTheme.id}
-          themeId={deleteTheme.id}
-          title={deleteTheme.title}
-          talked={deleteTheme.talked}
-          close={handleDeleteClose}
-        />
-      )} */}
     </>
   );
 };

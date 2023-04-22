@@ -4,7 +4,7 @@ import ThemeDashBoard from "@/features/themes/ThemeDashboard";
 const Home: FC = () => {
   return (
     <section>
-      <h2>ダッシュボード</h2>
+      <h2 className="font-bold">ダッシュボード</h2>
       <ThemeDashBoard />
     </section>
   );

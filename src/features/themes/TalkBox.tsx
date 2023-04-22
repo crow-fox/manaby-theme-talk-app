@@ -65,19 +65,19 @@ const TalkBox: FC = () => {
   if (unTalkedThemes.length === 0) {
     // まだ話していないトークテーマがない場合
     return (
-      <div className="rounded-md border border-red-400 bg-white p-4">
-        <p>
+      <div className="grid w-[min(40rem,100%)] gap-y-4 rounded-md  bg-white p-6">
+        <h3 className="text-3xl font-bold">
           {themes.length === 0
             ? "トークテーマが登録されていません"
             : "すべてのトークテーマを話し終えました"}
-        </p>
+        </h3>
         <p>ダッシュボードから追加してください。</p>
-        <p className="mt-4 grid ">
+        <p className="grid justify-center ">
           <button
             onClick={() => {
               navigate("/");
             }}
-            className="rounded-md bg-blue-300 p-4 font-bold"
+            className="w-96 rounded-md border-2 border-blue-400 bg-blue-200  p-4 text-lg font-bold"
           >
             ダッシュボードへ
           </button>
@@ -89,9 +89,9 @@ const TalkBox: FC = () => {
   if (talking === "idle") {
     // トークがスタートしていない時
     return (
-      <div>
+      <div className=" grid w-[min(40rem,100%)]">
         <button
-          className="bg-blue-300 p-4 text-lg font-bold text-gray-800"
+          className="rounded-md border-2 border-blue-400 bg-blue-200  p-4 text-lg font-bold "
           onClick={startTalk}
         >
           トークスタート
@@ -111,25 +111,31 @@ const TalkBox: FC = () => {
   if (talking === "running") {
     return (
       // トークがスタートしていて、まだ話していないテーマがある時
-      <div>
-        <h3 className="flex flex-wrap text-3xl font-bold ">
-          <output>
-            お題：
-            <span className="border-b-8 border-blue-500">
-              {randomTheme ? randomTheme.title : "もうありません"}
-            </span>
+      <div className="grid w-[min(40rem,100%)] gap-y-4 rounded-md bg-white p-6">
+        <h3 className="font-bold">トークテーマ</h3>
+        <p className="grid place-content-center gap-y-2">
+          <output className="text-3xl font-bold  ">
+            {randomTheme ? randomTheme.title : "もうありません"}
           </output>
-        </h3>
-        <ul className="mt-8 flex flex-wrap items-center gap-4">
+          <span className="flex justify-center gap-x-2">
+            <span className="h-2 w-2 rounded-full bg-blue-400"></span>
+            <span className="h-2 w-2 rounded-full bg-blue-400"></span>
+            <span className="h-2 w-2 rounded-full bg-blue-400"></span>
+          </span>
+        </p>
+        <ul className="mt-8 grid place-items-center gap-y-4 ">
           <li>
-            <button onClick={nextTalk} className="bg-blue-300 p-4  font-bold ">
+            <button
+              onClick={nextTalk}
+              className="w-96 rounded-md border-2 border-blue-400 bg-blue-200  p-4 text-lg font-bold "
+            >
               次のお題へ
             </button>
           </li>
           <li>
             <button
               onClick={finishTalk}
-              className="border-b border-black p-4 font-bold"
+              className="w-96 border-b border-black p-4 text-lg font-bold"
             >
               終了する
             </button>
