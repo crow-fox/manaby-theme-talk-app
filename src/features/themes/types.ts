@@ -44,3 +44,5 @@ export const isFirebaseTheme = (value: unknown): value is FirebaseTheme => {
     return false;
   }
 };
+
+export type ThemeFilter = "all" | "talked" | "untalked";

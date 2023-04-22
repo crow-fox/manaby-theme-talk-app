@@ -25,6 +25,7 @@ const AddThemeDialog: FC = () => {
       }
     }
     setThemeTitle("");
+    setOpen(false);
   };
 
   return (

@@ -16,8 +16,8 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
     title,
     talked,
   });
-  const openButtonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   if (!user) return null;
 
@@ -27,15 +27,32 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
       return;
     }
 
-    await updateTheme(user.id, themeId, { ...newTheme });
+    if (buttonRef.current instanceof HTMLButtonElement) {
+      buttonRef.current.focus();
+      console.log(buttonRef.current, "buttonRef");
+    } else {
+      console.log(buttonRef.current, "なし");
+    }
     setOpen(false);
-    openButtonRef.current?.focus();
+    await updateTheme(user.id, themeId, { ...newTheme });
+  };
+
+  const onOpenChange = (open: boolean) => {
+    console.log("onOpenChange");
+    if (!open) {
+      setNewTheme({ title, talked });
+    }
+    setOpen(open);
   };
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild ref={openButtonRef}>
-        <button className=" rounded-md bg-gray-600 p-2 font-bold text-white">
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Trigger asChild>
+        <button
+          ref={buttonRef}
+          id={`${themeId}-button`}
+          className=" rounded-md bg-gray-600 p-2 font-bold text-white"
+        >
           編集
         </button>
       </Dialog.Trigger>
