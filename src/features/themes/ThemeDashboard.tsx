@@ -1,6 +1,7 @@
 import { useState, type FC } from "react";
 import AddThemeDialog from "@/features/themes/AddThemeDialog";
 import FilterThemes from "@/features/themes/FilterThemes";
+import PrintThemes from "@/features/themes/PrintThemes";
 import ThemeTable from "@/features/themes/ThemeTable";
 import { useThemes } from "@/features/themes/ThemesProvider";
 import { type ThemeFilter } from "@/features/themes/types";
@@ -30,8 +31,15 @@ const ThemeDashBoard: FC = () => {
     <>
       <div className="grid place-items-end">
         <div className="flex flex-wrap items-center gap-2">
-          <AddThemeDialog />
-          <FilterThemes filter={filter} handleFilter={setFilter} />
+          <div>
+            <AddThemeDialog />
+          </div>
+          <div>
+            <FilterThemes filter={filter} handleFilter={setFilter} />
+          </div>
+          <div>
+            <PrintThemes themes={filteredThemes} filter={filter} />
+          </div>
         </div>
       </div>
 
