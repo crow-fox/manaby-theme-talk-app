@@ -29354,9 +29354,9 @@ var wO = "firebase",
  * limitations under the License.
  */ Cr(wO, EO, "app");
 const _O = {
-    apiKey: "AIzaSyBBQwWrRpLbyeE1psm1jeXBEoE1pYXZPIo",
-    authDomain: "theme-talk-app-dev.firebaseapp.com",
-    projectId: "theme-talk-app-dev",
+    apiKey: "AIzaSyCX7HQJaGan1rB3TjG7y29N4iGmwzUS144",
+    authDomain: "theme-talk-app-prod.firebaseapp.com",
+    projectId: "theme-talk-app-prod",
     storageBucket: {}.VITE__FIREBASE_STORAGE_BUCKET,
     messagingSenderId: {}.VITE__FIREBASE_MESSAGING_SENDER_ID,
     appId: {}.VITE__FIREBASE_APP_ID,
@@ -35896,6 +35896,7 @@ const aF = ({ themes: t, filter: e }) => {
     S(CO, {
       children: S(bO, {
         children: S(Uk, {
+          basename: "/manaby-theme-talk-app",
           children: S(TO, {
             children: X(Dk, {
               children: [
