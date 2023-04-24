@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "@/components/Layout";
 import AuthGuard from "@/features/auth/AuthGuard";
 import AuthProvider from "@/features/auth/AuthProvider";
@@ -13,7 +13,7 @@ const App: FC = () => {
   return (
     <AuthProvider>
       <ThemesProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Layout>
             <Routes>
               <Route
@@ -36,7 +36,7 @@ const App: FC = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
-        </BrowserRouter>
+        </HashRouter>
       </ThemesProvider>
     </AuthProvider>
   );
