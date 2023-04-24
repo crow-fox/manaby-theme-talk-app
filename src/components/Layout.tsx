@@ -18,36 +18,38 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             </Link>
           )}
         </header>
-        <div className="mx-auto max-w-[75rem] px-8">
-          <nav>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 ">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "inline-block border-b-4 border-blue-400 py-2 text-lg font-bold"
-                      : "inline-block border-b-4 border-transparent py-2 text-lg font-bold text-gray-600"
-                  }
-                >
-                  ダッシュボード
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/talk"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "inline-block border-b-4 border-blue-400 py-2 text-lg font-bold"
-                      : "inline-block border-b-4 border-transparent py-2 text-lg font-bold text-gray-600"
-                  }
-                >
-                  トークする
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {user !== null && (
+          <div className="mx-auto max-w-[75rem] px-8">
+            <nav>
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 ">
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "inline-block border-b-4 border-blue-400 py-2 text-lg font-bold"
+                        : "inline-block border-b-4 border-transparent py-2 text-lg font-bold text-gray-600"
+                    }
+                  >
+                    ダッシュボード
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/talk"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "inline-block border-b-4 border-blue-400 py-2 text-lg font-bold"
+                        : "inline-block border-b-4 border-transparent py-2 text-lg font-bold text-gray-600"
+                    }
+                  >
+                    トークする
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </div>
       <div className="bg-gray-200 p-8">
         <main className="mx-auto max-w-[60rem]">{children}</main>
