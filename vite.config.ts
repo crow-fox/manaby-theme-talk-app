@@ -6,7 +6,7 @@ import path from "path";
 export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
-    base: process.env.GITHUB_PAGES ? process.env.BASE_URL : "/",
+    base: process.env.GITHUB_PAGES ? "/manaby-theme-talk-app" : "/",
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
