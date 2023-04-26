@@ -3,5 +3,5 @@ on: [push]
 jobs: 
   check-bats-version:
     runs-on: ubuntu-latest
-    step: 
+    steps: 
       - run: echo "this is pen"
