@@ -29,16 +29,12 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
 
     if (buttonRef.current instanceof HTMLButtonElement) {
       buttonRef.current.focus();
-      console.log(buttonRef.current, "buttonRef");
-    } else {
-      console.log(buttonRef.current, "なし");
     }
     setOpen(false);
     await updateTheme(user.id, themeId, { ...newTheme });
   };
 
   const onOpenChange = (open: boolean) => {
-    console.log("onOpenChange");
     if (!open) {
       setNewTheme({ title, talked });
     }
@@ -79,17 +75,20 @@ const EditThemeDialog: FC<Props> = ({ themeId, title, talked }) => {
                     minLength={1}
                   />
                 </Form.Field>
-                <Form.Field name="talked" className="grid gap-y-2">
-                  <Form.Label className="text-sm ">話した？</Form.Label>
+                <Form.Field
+                  name="talked"
+                  className="flex items-center justify-start gap-2"
+                >
                   <Form.Control
                     name="talked"
-                    className="rounded-sm border border-blue-700 p-4 text-lg"
+                    className=" h-8 w-8 rounded-sm border border-blue-700 p-4 text-lg accent-blue-700"
                     type="checkbox"
                     checked={newTheme.talked}
                     onChange={(e) => {
                       setNewTheme({ ...newTheme, talked: e.target.checked });
                     }}
                   />
+                  <Form.Label className="text-sm ">話した？</Form.Label>
                 </Form.Field>
                 <div className="grid">
                   <Form.Submit asChild>
