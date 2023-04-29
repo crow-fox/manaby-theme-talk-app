@@ -56,11 +56,22 @@ const TalkBox: FC = () => {
     setTalking("running");
   };
 
-  const finishTalk = () => {
-    setTalking("idle");
+  const finishTalk = async () => {
+    if (randomTheme === null) return;
+    setTalking("loading");
+    await updateTheme(user.id, randomTheme.id, { talked: true });
     setRandomTheme(null);
     navigate("/");
+    setTalking("idle");
   };
+
+  if (talking === "loading") {
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  }
 
   if (unTalkedThemes.length === 0) {
     // まだ話していないトークテーマがない場合
@@ -96,14 +107,6 @@ const TalkBox: FC = () => {
         >
           トークスタート
         </button>
-      </div>
-    );
-  }
-
-  if (talking === "loading") {
-    return (
-      <div>
-        <Spinner />
       </div>
     );
   }
